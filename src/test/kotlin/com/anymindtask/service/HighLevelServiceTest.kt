@@ -28,10 +28,13 @@ class HighLevelServiceTest {
                 WalletTransaction(id = "6146f96683b64541a0fcc361", amount = 5.1.toBigDecimal(), balanceBefore = 1000.0.toBigDecimal(), balanceAfter = 1005.1.toBigDecimal(), datetime = Date(1631861573685)),
                 WalletTransaction(id = "6146f99b83b64541a0fcc362", amount = 101.15.toBigDecimal(), balanceBefore = 1005.1.toBigDecimal(), balanceAfter = 1106.25.toBigDecimal(), datetime = Date(1632045173685)),
                 WalletTransaction(id = "6146f9ae83b64541a0fcc363", amount = 1.5.toBigDecimal(), balanceBefore = 1106.25.toBigDecimal(), balanceAfter = 1107.75.toBigDecimal(), datetime = Date(1632055973685)),
-                WalletTransaction(id = "6146f9b683b64541a0fcc364", amount = 1.5.toBigDecimal(), balanceBefore = 1107.75.toBigDecimal(), balanceAfter = 1109.25.toBigDecimal(), datetime = Date(1632063173685)))
+                WalletTransaction(id = "6146f9b683b64541a0fcc364", amount = 1.5.toBigDecimal(), balanceBefore = 1107.75.toBigDecimal(), balanceAfter = 1109.25.toBigDecimal(), datetime = Date(1632063173685)),
+                WalletTransaction(id = "6146f9b683b64541a0fcc364", amount = 2.2.toBigDecimal(), balanceBefore = 1109.25.toBigDecimal(), balanceAfter = 1111.45.toBigDecimal(), datetime = Date(1632063173685)))
         Mockito.`when`(walletTransactionService.findAllWalletTransactionBetween(period = requestPeriod)).thenReturn(transactions)
 
         val historyDtoList = highLevelService.getWalletHistoryBetween(period = requestPeriod).collectList().block()
+
+        //we expect 4 time slots with one hour period with 5 transactions which are mocked
         Assertions.assertEquals(4, historyDtoList?.size)
     }
 }
